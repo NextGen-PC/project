@@ -25,6 +25,8 @@ const AdminDashboard = () => (
   </div>
 );
 
+import QuanLyDanhMuc from '../views/admin/QuanLyDanhMuc';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -36,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'products',
-        element: <div className="p-20 text-center text-2xl font-bold">Danh sách sản phẩm</div>,
+        element: <div className="p-20 text-center text-2xl font-bold italic text-gray-400">Đang cập nhật danh sách...</div>,
       },
     ],
   },
@@ -49,8 +51,12 @@ const router = createBrowserRouter([
         element: <AdminDashboard />,
       },
       {
+        path: 'categories',
+        element: <QuanLyDanhMuc />,
+      },
+      {
         path: 'products',
-        element: <div className="text-xl">Quản lý linh kiện</div>,
+        element: <div className="p-10 bg-white rounded-xl shadow-sm border border-gray-100 text-xl font-bold">Quản lý linh kiện (Sắp ra mắt)</div>,
       },
     ],
   },

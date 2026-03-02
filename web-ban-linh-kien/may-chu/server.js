@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose'); // Thêm dòng này để không bị lỗi "not defined"
 const cors = require('cors');
@@ -12,15 +13,11 @@ mongoose.connect('mongodb://127.0.0.1:27017/pc-builder')
   .then(() => console.log("✅ Đã kết nối đúng Database: pc-builder"))
   .catch(err => console.error("❌ Lỗi kết nối MongoDB:", err));
 
-// API lấy danh sách linh kiện từ collection 'sanphams'
-app.get('/api/san-pham', async (req, res) => {
-    try {
-        const danhSach = await SanPham.find();
-        res.json(danhSach);
-    } catch (err) {
-        res.status(500).json({ message: "Lỗi khi lấy dữ liệu từ Server" });
-    }
-});
+const danhMucRoute = require('./src/tuyen-duong/danhMucRoute');
+const sanPhamRoute = require('./src/tuyen-duong/sanPhamRoute');
+
+app.use('/api/danh-muc', danhMucRoute);
+app.use('/api/san-pham', sanPhamRoute);
 
 app.get('/', (req, res) => {
     res.send('Máy chủ Build PC đang hoạt động!');
