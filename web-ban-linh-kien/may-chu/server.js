@@ -15,9 +15,11 @@ mongoose.connect('mongodb://127.0.0.1:27017/pc-builder')
 
 const danhMucRoute = require('./src/tuyen-duong/danhMucRoute');
 const sanPhamRoute = require('./src/tuyen-duong/sanPhamRoute');
+const maGiamGiaRoute = require('./src/tuyen-duong/maGiamGiaRoute');
 
 app.use('/api/danh-muc', danhMucRoute);
 app.use('/api/san-pham', sanPhamRoute);
+app.use('/api/ma-giam-gia', maGiamGiaRoute);
 
 app.get('/', (req, res) => {
     res.send('Máy chủ Build PC đang hoạt động!');
