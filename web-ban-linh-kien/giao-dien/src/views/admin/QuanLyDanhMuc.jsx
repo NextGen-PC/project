@@ -8,12 +8,13 @@ const QuanLyDanhMuc = () => {
   const [showModal, setShowModal] = useState(false);
   const [editData, setEditData] = useState(null);
   const [formData, setFormData] = useState({ ten: '', moTa: '' });
+  const [submitting, setSubmitting] = useState(false);
   
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
 
-  const API_URL = 'http://localhost:5000/api/danh-muc';
+  const API_URL = `${process.env.REACT_APP_API_URL}/danh-muc`;
 
   useEffect(() => {
     fetchDanhMucs();
@@ -45,6 +46,7 @@ const QuanLyDanhMuc = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setSubmitting(true);
       if (editData) {
         await axios.put(`${API_URL}/${editData._id}`, formData);
       } else {
@@ -54,6 +56,8 @@ const QuanLyDanhMuc = () => {
       fetchDanhMucs();
     } catch (err) {
       alert("Lỗi: " + (err.response?.data?.message || err.message));
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -181,9 +185,18 @@ const QuanLyDanhMuc = () => {
                 </button>
                 <button 
                   type="submit" 
-                  className="flex-1 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold shadow-lg transition-all"
+                  disabled={submitting}
+                  className={`flex-1 px-4 py-3 text-white rounded-xl font-bold shadow-lg transition-all flex items-center justify-center ${submitting ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
                 >
-                  Lưu lại
+                  {submitting ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Đang lưu...
+                    </>
+                  ) : 'Lưu lại'}
                 </button>
               </div>
             </form>

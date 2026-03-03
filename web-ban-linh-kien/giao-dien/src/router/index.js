@@ -26,6 +26,8 @@ const AdminDashboard = () => (
 );
 
 import QuanLyDanhMuc from '../views/admin/QuanLyDanhMuc';
+import QuanLySanPham from '../views/admin/QuanLySanPham';
+import QuanLyMaGiamGia from '../views/admin/QuanLyMaGiamGia';
 
 const router = createBrowserRouter([
   {
@@ -56,7 +58,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'products',
-        element: <div className="p-10 bg-white rounded-xl shadow-sm border border-gray-100 text-xl font-bold">Quản lý linh kiện (Sắp ra mắt)</div>,
+        element: <QuanLySanPham />,
+      },
+      {
+        path: 'vouchers',
+        element: <QuanLyMaGiamGia />,
       },
     ],
   },
