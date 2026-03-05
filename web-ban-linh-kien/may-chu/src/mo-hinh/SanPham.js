@@ -20,6 +20,18 @@ const SanPhamSchema = new mongoose.Schema({
     thongSo: {
         type: String
     }
-}, { timestamps: true });
+}, { 
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+});
+
+// Virtual field for variants
+SanPhamSchema.virtual('bienThe', {
+    ref: 'BienThe',
+    localField: '_id',
+    foreignField: 'idSanPham'
+});
+
 
 module.exports = mongoose.model('SanPham', SanPhamSchema);

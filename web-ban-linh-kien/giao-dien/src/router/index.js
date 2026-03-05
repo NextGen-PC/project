@@ -28,6 +28,7 @@ const AdminDashboard = () => (
 import QuanLyDanhMuc from '../views/admin/QuanLyDanhMuc';
 import QuanLySanPham from '../views/admin/QuanLySanPham';
 import QuanLyMaGiamGia from '../views/admin/QuanLyMaGiamGia';
+import QuanLyUser from '../views/admin/QuanLyUser';
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: 'vouchers',
         element: <QuanLyMaGiamGia />,
+      },
+      {
+        path: 'users',
+        element: <QuanLyUser />,
       },
     ],
   },
