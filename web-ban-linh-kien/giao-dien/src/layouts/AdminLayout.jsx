@@ -37,10 +37,6 @@ const AdminLayout = () => {
             <span className="mr-3">👥</span>
             <span className="font-medium">Quản lý người dùng</span>
           </Link>
-          <Link to="/admin/settings" className="flex items-center p-3 text-gray-300 hover:bg-blue-600 hover:text-white rounded-lg transition-colors group mb-2 absolute bottom-8 w-52">
-            <span className="mr-3">⚙️</span>
-            <span className="font-medium">Cài đặt</span>
-          </Link>
         </nav>
       </aside>
 

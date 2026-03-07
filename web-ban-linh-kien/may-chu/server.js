@@ -37,12 +37,16 @@ const sanPhamRoute = require('./src/tuyen-duong/sanPhamRoute');
 const maGiamGiaRoute = require('./src/tuyen-duong/maGiamGiaRoute');
 const userRoute = require('./src/tuyen-duong/userRoute');
 const bienTheRoute = require('./src/tuyen-duong/bienTheRoute');
+const orderRoute = require('./src/tuyen-duong/orderRoute');
+const orderItemRoute = require('./src/tuyen-duong/orderItemRoute');
 
 app.use('/api/danh-muc', danhMucRoute);
 app.use('/api/san-pham', sanPhamRoute);
 app.use('/api/ma-giam-gia', maGiamGiaRoute);
 app.use('/api/users', userRoute);
 app.use('/api/bien-the', bienTheRoute);
+app.use('/api/orders', orderRoute);
+app.use('/api/order-items', orderItemRoute);
 
 app.get('/', (req, res) => {
     res.send('Máy chủ Build PC đang hoạt động!');
