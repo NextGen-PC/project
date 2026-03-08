@@ -39,6 +39,7 @@ const userRoute = require('./src/tuyen-duong/userRoute');
 const bienTheRoute = require('./src/tuyen-duong/bienTheRoute');
 const orderRoute = require('./src/tuyen-duong/orderRoute');
 const orderItemRoute = require('./src/tuyen-duong/orderItemRoute');
+const thongKeRoute = require('./src/tuyen-duong/thongKeRoute');
 
 app.use('/api/danh-muc', danhMucRoute);
 app.use('/api/san-pham', sanPhamRoute);
@@ -47,6 +48,7 @@ app.use('/api/users', userRoute);
 app.use('/api/bien-the', bienTheRoute);
 app.use('/api/orders', orderRoute);
 app.use('/api/order-items', orderItemRoute);
+app.use('/api/thong-ke', thongKeRoute);
 
 app.get('/', (req, res) => {
     res.send('Máy chủ Build PC đang hoạt động!');
