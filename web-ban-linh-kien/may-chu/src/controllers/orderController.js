@@ -1,14 +1,9 @@
-const Order = require('../mo-hinh/Order');
+﻿const orderService = require('../services/orderService');
 
 // Lấy danh sách tất cả đơn hàng
 exports.layDanhSachOrder = async (req, res) => {
     try {
-        const danhSach = await Order.find()
-            .populate('idUser')
-            .populate({
-                path: 'orderItems',
-                populate: { path: 'idSanPham' }
-            });
+        const danhSach = await orderService.layDanhSachOrder();
         res.json(danhSach);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -21,14 +16,7 @@ exports.capNhatTrangThai = async (req, res) => {
         const { id } = req.params;
         const { trangThai } = req.body;
         
-        const orderCapNhat = await Order.findByIdAndUpdate(
-            id,
-            { trangThai },
-            { new: true }
-        ).populate('idUser').populate({
-            path: 'orderItems',
-            populate: { path: 'idSanPham' }
-        });
+        const orderCapNhat = await orderService.capNhatTrangThaiOrder(id, trangThai);
 
         if (!orderCapNhat) {
             return res.status(404).json({ message: "Không tìm thấy đơn hàng" });
