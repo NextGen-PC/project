@@ -1,4 +1,4 @@
-const express = require('express');
+﻿const express = require('express');
 const router = express.Router();
 const {
     layDanhSachBienThe,
@@ -6,7 +6,7 @@ const {
     taoMoi,
     capNhat,
     xoa
-} = require('../bo-dieu-khien/bienTheController');
+} = require('../controllers/bienTheController');
 
 // GET /api/bien-the
 router.get('/', layDanhSachBienThe);
@@ -24,3 +24,4 @@ router.put('/:id', capNhat);
 router.delete('/:id', xoa);
 
 module.exports = router;
+

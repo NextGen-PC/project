@@ -112,6 +112,10 @@ const QuanLySanPham = () => {
     data.append('gia', formData.gia);
     data.append('thongSo', formData.thongSo);
     
+    if (file) {
+      data.append('anh', file);
+    }
+    
     // Gửi mảng biến thể dưới dạng JSON string để Backend xử lý
     // Lưu ý: sanPhamController cần nhận req.body.bienThe đã parse nếu dùng multer, 
     // hoặc bạn có thể append từng phần nếu cần. Ở đây tôi dùng JSON.stringify cho tiện.

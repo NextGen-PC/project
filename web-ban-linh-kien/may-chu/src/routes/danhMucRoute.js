@@ -1,6 +1,6 @@
-const express = require('express');
+﻿const express = require('express');
 const router = express.Router();
-const { layTatCa, taoMoi, capNhat, xoa } = require('../bo-dieu-khien/danhMucController');
+const { layTatCa, taoMoi, capNhat, xoa } = require('../controllers/danhMucController');
 
 // GET /api/danh-muc
 router.get('/', layTatCa);
@@ -15,3 +15,4 @@ router.put('/:id', capNhat);
 router.delete('/:id', xoa);
 
 module.exports = router;
+

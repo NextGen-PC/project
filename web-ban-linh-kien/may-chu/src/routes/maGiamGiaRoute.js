@@ -1,4 +1,4 @@
-const express = require('express');
+﻿const express = require('express');
 const router = express.Router();
 const { 
     layTatCa, 
@@ -7,7 +7,7 @@ const {
     capNhat, 
     xoa, 
     kiemTraMa 
-} = require('../bo-dieu-khien/maGiamGiaController');
+} = require('../controllers/maGiamGiaController');
 
 // GET /api/ma-giam-gia
 router.get('/', layTatCa);
@@ -28,3 +28,4 @@ router.put('/:id', capNhat);
 router.delete('/:id', xoa);
 
 module.exports = router;
+
