@@ -14,11 +14,16 @@ const SanPhamSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    anh: {
-        type: String
-    },
     thongSo: {
         type: String
+    },
+    soLuong: {
+        type: Number,
+        default: 0
+    },
+    daBan: {
+        type: Number,
+        default: 0
     }
 }, { 
     timestamps: true,

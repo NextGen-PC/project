@@ -15,16 +15,30 @@ const layChiTietSanPham = async (id) => {
 };
 
 const taoMoiSanPham = async (duLieuSanPham, duLieuBienThe) => {
-    const sanPhamMoi = new SanPham(duLieuSanPham);
+    if (!duLieuBienThe || !Array.isArray(duLieuBienThe) || duLieuBienThe.length === 0) {
+        throw new Error("Sản phẩm bắt buộc phải có ít nhất một biến thể (phiên bản)");
+    }
+
+    // Tính tổng số lượng và đã bán từ các biến thể
+    let tongSoLuong = 0;
+    let tongDaBan = 0;
+    duLieuBienThe.forEach(bt => {
+        tongSoLuong += Number(bt.soLuong || 0);
+        tongDaBan += Number(bt.daBan || 0);
+    });
+
+    const sanPhamMoi = new SanPham({
+        ...duLieuSanPham,
+        soLuong: tongSoLuong,
+        daBan: tongDaBan
+    });
     await sanPhamMoi.save();
 
-    if (duLieuBienThe && Array.isArray(duLieuBienThe)) {
-        const bienThes = duLieuBienThe.map(bt => ({
-            ...bt,
-            idSanPham: sanPhamMoi._id
-        }));
-        await BienThe.insertMany(bienThes);
-    }
+    const bienThes = duLieuBienThe.map(bt => ({
+        ...bt,
+        idSanPham: sanPhamMoi._id
+    }));
+    await BienThe.insertMany(bienThes);
 
     return await SanPham.findById(sanPhamMoi._id)
         .populate('idDanhMuc')
@@ -32,9 +46,25 @@ const taoMoiSanPham = async (duLieuSanPham, duLieuBienThe) => {
 };
 
 const capNhatSanPham = async (id, duLieuCapNhat, duLieuBienThe) => {
+    if (duLieuBienThe && (!Array.isArray(duLieuBienThe) || duLieuBienThe.length === 0)) {
+        throw new Error("Sản phẩm bắt buộc phải có ít nhất một biến thể (phiên bản)");
+    }
+
+    let extraData = {};
+    if (duLieuBienThe) {
+        let tongSoLuong = 0;
+        let tongDaBan = 0;
+        duLieuBienThe.forEach(bt => {
+            tongSoLuong += Number(bt.soLuong || 0);
+            tongDaBan += Number(bt.daBan || 0);
+        });
+        extraData.soLuong = tongSoLuong;
+        extraData.daBan = tongDaBan;
+    }
+
     const sanPhamCapNhat = await SanPham.findByIdAndUpdate(
         id,
-        duLieuCapNhat,
+        { ...duLieuCapNhat, ...extraData },
         { new: true }
     );
 
@@ -42,7 +72,7 @@ const capNhatSanPham = async (id, duLieuCapNhat, duLieuBienThe) => {
         return null;
     }
 
-    if (duLieuBienThe && Array.isArray(duLieuBienThe)) {
+    if (duLieuBienThe) {
         await BienThe.deleteMany({ idSanPham: id });
         const bienThes = duLieuBienThe.map(bt => ({
             ...bt,
