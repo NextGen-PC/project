@@ -1,4 +1,4 @@
-﻿const BienThe = require('../models/BienThe');
+const BienThe = require('../models/BienThe');
 
 // Láº¥y danh sÃ¡ch táº¥t cáº£ biáº¿n thá»ƒ
 exports.layDanhSachBienThe = async (req, res) => {

@@ -38,7 +38,6 @@ const maGiamGiaRoute = require('./src/routes/maGiamGiaRoute');
 const userRoute = require('./src/routes/userRoute');
 const bienTheRoute = require('./src/routes/bienTheRoute');
 const orderRoute = require('./src/routes/orderRoute');
-const orderItemRoute = require('./src/routes/orderItemRoute');
 const thongKeRoute = require('./src/routes/thongKeRoute');
 
 app.use('/api/danh-muc', danhMucRoute);
@@ -47,7 +46,6 @@ app.use('/api/ma-giam-gia', maGiamGiaRoute);
 app.use('/api/users', userRoute);
 app.use('/api/bien-the', bienTheRoute);
 app.use('/api/orders', orderRoute);
-app.use('/api/order-items', orderItemRoute);
 app.use('/api/thong-ke', thongKeRoute);
 
 app.get('/', (req, res) => {
