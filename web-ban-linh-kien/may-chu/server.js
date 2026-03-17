@@ -32,6 +32,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/pc-builder')
   })
   .catch(err => console.error("❌ Lỗi kết nối MongoDB:", err));
 
+const authRoute = require('./src/routes/authRoute');
 const danhMucRoute = require('./src/routes/danhMucRoute');
 const sanPhamRoute = require('./src/routes/sanPhamRoute');
 const maGiamGiaRoute = require('./src/routes/maGiamGiaRoute');
@@ -40,6 +41,7 @@ const bienTheRoute = require('./src/routes/bienTheRoute');
 const orderRoute = require('./src/routes/orderRoute');
 const thongKeRoute = require('./src/routes/thongKeRoute');
 
+app.use('/api/auth', authRoute);
 app.use('/api/danh-muc', danhMucRoute);
 app.use('/api/san-pham', sanPhamRoute);
 app.use('/api/ma-giam-gia', maGiamGiaRoute);
