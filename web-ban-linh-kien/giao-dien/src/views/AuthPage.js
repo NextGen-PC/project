@@ -4,19 +4,19 @@ import { useNavigate } from 'react-router-dom';
 
 const AuthPage = () => {
     const [isLogin, setIsLogin] = useState(true);
-    const [formData, setFormData] = useState({ ten: '', email: '', matKhau: '' });
+    const [formData, setFormData] = useState({ username: '', email: '', password: '' });
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             if (isLogin) {
-                const data = await dangNhap({ email: formData.email, matKhau: formData.matKhau });
+                const data = await dangNhap({ email: formData.email, password: formData.password });
                 
                 // QUAN TRỌNG: Lưu thông tin đăng nhập để Banner có thể hiện "Hi, Quang"
                 localStorage.setItem('user', JSON.stringify(data));
                 
-                alert('Chào mừng ' + data.user.ten);
+                alert('Chào mừng ' + data.user.username);
 
                 // CHỈNH Ở ĐÂY: Chuyển hướng về Trang Chủ (/) thay vì (/build)
                 navigate('/'); 
@@ -40,7 +40,7 @@ const AuthPage = () => {
                         type="text" 
                         placeholder="Tên của bạn" 
                         style={styles.input}
-                        onChange={(e) => setFormData({...formData, ten: e.target.value})} 
+                        onChange={(e) => setFormData({...formData, username: e.target.value})} 
                     />
                 )}
                 <input 
@@ -55,7 +55,7 @@ const AuthPage = () => {
                     placeholder="Mật khẩu" 
                     required 
                     style={styles.input}
-                    onChange={(e) => setFormData({...formData, matKhau: e.target.value})} 
+                    onChange={(e) => setFormData({...formData, password: e.target.value})} 
                 />
                 
                 <button type="submit" style={styles.button}>
