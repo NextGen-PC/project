@@ -1,7 +1,6 @@
 // giao-dien/src/trang/TrangGioHang.js
 import React, { useContext } from 'react';
 import { CartContext } from '../../context/CartContext';
-import Banner from '../../components/Banner';
 
 const TrangGioHang = () => {
     // Lấy thêm updateQty từ Context
@@ -11,7 +10,6 @@ const TrangGioHang = () => {
 
     return (
         <div style={{ backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
-            <Banner />
             <div style={styles.container}>
                 <h2>🛒 GIỎ HÀNG CỦA BẠN</h2>
                 {cartItems.length === 0 ? (
